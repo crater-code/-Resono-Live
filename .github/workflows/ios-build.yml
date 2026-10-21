@@ -1,0 +1,72 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main, develop ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    env:
+      FLUTTER_XCODE_SWIFT_PACKAGE_MANAGER_ENABLED: 0
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    
+    - name: Disable SPM globally
+      run: flutter config --no-enable-swift-package-manager
+    
+    - name: Create .env file from secrets
+      working-directory: ./vibe_swipe
+      run: |
+        cat > assets/.env << EOF
+        STRIPE_PUBLISHABLE_KEY=${{ secrets.STRIPE_PUBLISHABLE_KEY }}
+        PYTHON_API_URL=${{ secrets.PYTHON_API_URL }}
+        BASE_URL=${{ secrets.BASE_URL }}
+        AGORA_APP_ID=${{ secrets.AGORA_APP_ID }}
+        AGORA_CHANNEL_NAME=${{ secrets.AGORA_CHANNEL_NAME }}
+        AGORA_TEST_MODE=${{ secrets.AGORA_TEST_MODE }}
+        EOF
+    
+    - name: Get dependencies
+      working-directory: ./vibe_swipe
+      run: |
+        flutter pub get
+        cd ios && rm -rf Pods Podfile.lock .symlinks && pod install --repo-update && cd ..
+    
+    - name: Build iOS (No Code Sign)
+      working-directory: ./vibe_swipe
+      run: flutter build ios --release --no-codesign
+    
+    - name: Upload iOS build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-release-build
+        path: vibe_swipe/build/ios/iphoneos/
+        retention-days: 30
+    
+    - name: Create IPA for distribution
+      working-directory: ./vibe_swipe
+      run: |
+        mkdir -p build/ios/ipa
+        cd build/ios/iphoneos
+        mkdir -p Payload
+        mv Runner.app Payload/
+        zip -r ../ipa/vibe_swipe.ipa Payload
+        cd ../../../
+    
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: vibe-swipe-ipa
+        path: vibe_swipe/build/ios/ipa/vibe_swipe.ipa
+        retention-days: 30

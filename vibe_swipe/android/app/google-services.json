@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "367306858996",
+    "project_id": "vibe-swipe-llc",
+    "storage_bucket": "vibe-swipe-llc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367306858996:android:89d0f80bc55fb426fc59a1",
+        "android_client_info": {
+          "package_name": "com.vibeswipellc.vibeswipe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367306858996-642j3dv5kquvdpngitkjv406ngquhsem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vibeswipellc.vibeswipe",
+            "certificate_hash": "c0649cf24f582bf1b10c67c3c15ea5d2b66b552c"
+          }
+        },
+        {
+          "client_id": "367306858996-tmbs10ob7s1v43ft1mkgshrf65jjbu6b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vibeswipellc.vibeswipe",
+            "certificate_hash": "755b83f9ed4054cbbcf377d227842794d7950b12"
+          }
+        },
+        {
+          "client_id": "367306858996-l8k5q7fsg6g8f0honpm1od0gocshpd8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKH-WWt_6KzINZmLfrfpZE3fHY0-nSjm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367306858996-l8k5q7fsg6g8f0honpm1od0gocshpd8d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "367306858996-oepl42avutap73h38qejqco3klqo40vp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vibeswipellc.vibeswipe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

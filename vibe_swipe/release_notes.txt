@@ -1,0 +1,8 @@
+<en-US>
+What's new in this release:
+
+• Added transparent fee breakdown for artists across earnings and payout screens (Store, Platform, and Stripe fees).
+• Enhanced live streaming stability and audio synchronization.
+• Optimized Stripe Connect wallet setup and bank withdrawal flows.
+• General UI responsiveness improvements and bug fixes.
+</en-US>
